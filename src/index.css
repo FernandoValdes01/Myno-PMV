@@ -1,0 +1,479 @@
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+  background-color: #1a1a1a;
+  color: #e6e6e6;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  padding: 1rem;
+  background-color: #333;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.icon-link {
+  color: #e6e6e6;
+  font-size: 1.5rem;
+  transition: color 0.3s;
+}
+
+.icon-link:hover {
+  color: #808080;
+}
+
+/* Home */
+.container {
+  max-width: 800px;
+  margin: 6rem auto 2rem;
+  padding: 2rem;
+}
+
+.title {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #4d4d4d;
+}
+
+.items-container {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.item-card {
+  background-color: #262626;
+  padding: 1.5rem;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #404040;
+}
+
+.buy-button {
+  background-color: #404040;
+  color: #e6e6e6;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buy-button:hover {
+  background-color: #4d4d4d;
+}
+
+/* Páginas comunes */
+.page-container {
+  max-width: 800px;
+  margin: 6rem auto 2rem;
+  padding: 2rem;
+}
+
+.page-title {
+  margin-bottom: 2rem;
+  color: #4d4d4d;
+}
+/* Header mejorado */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #333;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+
+.header-title {
+  color: #e6e6e6;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.header-icons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Perfil de usuario */
+.user-profile {
+  background-color: #262626;
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid #404040;
+}
+
+.profile-section {
+  margin-bottom: 2rem;
+}
+
+.profile-section h2 {
+  color: #4d4d4d;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.purchase-list {
+  padding-left: 1.5rem;
+}
+
+.purchase-list li {
+  margin-bottom: 0.5rem;
+}
+
+.profile-footer {
+  margin-top: 3rem;
+  text-align: center;
+  color: #808080;
+}
+
+.info-links {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.info-link {
+  color: #e6e6e6;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.info-link:hover {
+  color: #808080;
+  text-decoration: underline;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.global-footer {
+  margin-top: auto;
+}
+/* Footer Global */
+.global-footer {
+  background-color: #262626;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 3rem;
+  border-top: 1px solid #404040;
+}
+
+.footer-links {
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  color: #e6e6e6;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #808080;
+  text-decoration: underline;
+}
+
+.footer-text {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+/* User Profile Updates */
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: #e6e6e6;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s;
+}
+
+.back-button:hover {
+  color: #808080;
+}
+
+.user-profile-grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.profile-container, .purchases-container {
+  background-color: #262626;
+  border: 1px solid #404040;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.profile-section-title {
+  color: #4d4d4d;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  border-bottom: 1px solid #404040;
+  padding-bottom: 0.5rem;
+}
+
+.profile-info p {
+  margin-bottom: 1rem;
+}
+
+.purchases-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.purchase-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #1f1f1f;
+  border-radius: 4px;
+}
+
+.purchase-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.purchase-product {
+  font-weight: bold;
+}
+
+.purchase-date {
+  color: #808080;
+  font-size: 0.9rem;
+}
+
+.purchase-price {
+  color: #e6e6e6;
+  font-weight: bold;
+}
+/* About Page Styles */
+.about-section {
+  background-color: #262626;
+  border: 1px solid #404040;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.privacy-section {
+  border-left: 4px solid #4d4d4d;
+}
+
+.section-title {
+  color: #4d4d4d;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.section-content {
+  line-height: 1.6;
+}
+
+.feature-list, .privacy-list {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.feature-list li, .privacy-list li {
+  margin-bottom: 0.8rem;
+  position: relative;
+}
+
+.feature-list li::before {
+  content: "▹";
+  color: #808080;
+  position: absolute;
+  left: -1.2rem;
+}
+
+.privacy-list {
+  counter-reset: item;
+}
+
+.privacy-list li {
+  counter-increment: item;
+}
+
+.privacy-list li::before {
+  content: counter(item) ".";
+  color: #808080;
+  position: absolute;
+  left: -1.2rem;
+}
+
+.highlight-box {
+  background-color: #1f1f1f;
+  border-left: 3px solid #808080;
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+.inline-link {
+  color: #e6e6e6;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.inline-link:hover {
+  color: #808080;
+}
+
+.philosophy-text {
+  font-style: italic;
+  color: #a6a6a6;
+  line-height: 1.8;
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 2px solid #4d4d4d;
+}
+
+.signature {
+  text-align: right;
+  color: #808080;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+/* Ejemplo: hacer el fondo más claro */
+.about-section {
+  background-color: #2e2e2e; /* Valor más claro que #262626 */
+}
+/* index.css */
+.page-container {
+  background-color: #1a1a1a; /* Fondo principal oscuro */
+  min-height: 100vh;
+}
+
+.about-section {
+  background-color: #262626 !important; /* Fuerza el color */
+  margin: 1rem 0;
+}
+.page-container {
+  min-height: calc(100vh - 100px); /* Ajusta según tu header/footer */
+  padding: 20px;
+}
+/* Agrega esto al final de index.css */
+.page-container {
+  border: 2px solid red !important; /* Para ver límites */
+}
+
+.about-section {
+  border: 2px solid blue !important;
+}
+
+.section-title {
+  background-color: lime !important;
+  color: black !important;
+}
+/* ABOUT PAGE SPECIFIC STYLES */
+.page-title {
+  color: #808080;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.about-section {
+  background-color: #262626;
+  border: 1px solid #404040;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.privacy-section {
+  border-left: 4px solid #4d4d4d;
+}
+
+.section-title {
+  color: #e6e6e6 !important;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #404040;
+}
+
+.feature-list {
+  padding-left: 1.5rem;
+}
+
+.feature-list li {
+  margin-bottom: 1rem;
+  color: #a6a6a6;
+}
+
+.privacy-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.privacy-list li {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  background-color: #1f1f1f;
+  border-radius: 4px;
+}
+
+.highlight-box {
+  background-color: #2d2d2d;
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin: 2rem 0;
+  border: 1px solid #4d4d4d;
+}
+
+.inline-link {
+  color: #e6e6e6;
+  text-decoration: underline;
+}
+
+.philosophy-text {
+  font-style: italic;
+  color: #a6a6a6;
+  line-height: 1.8;
+  border-left: 3px solid #4d4d4d;
+  padding-left: 1.5rem;
+}
+
+.signature {
+  text-align: right;
+  color: #808080;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
