@@ -1,7 +1,13 @@
-import { Link } from "react-router-dom"; // Agrega esto en la parte superior del archivo
+import { Link } from "react-router-dom";
+
 const About = () => {
     return (
       <div className="page-container">
+        <div className="back-button-container">
+          <Link to="/" className="back-button">
+            ← Volver al Inicio
+          </Link>
+        </div>
         <h1 className="page-title">TECNOLOGÍA Y PRIVACIDAD</h1>
         
         <div className="about-section">

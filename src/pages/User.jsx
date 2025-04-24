@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
+import { useState } from "react";
 
 const User = () => {
   const navigate = useNavigate();
+  const [selectedProducts, setSelectedProducts] = useState([]);
   
   const userData = {
     name: "Juan Pérez",
@@ -13,6 +15,27 @@ const User = () => {
       { id: 2, product: "Pack de Vino Tinto", date: "02/04/2024", price: "$24.990" },
       { id: 3, product: "Redbull Individual", date: "20/03/2024", price: "$2.490" }
     ]
+  };
+
+  const productCategories = [
+    "Energizantes (Redbull, Monster)",
+    "Vinos y Espumantes",
+    "Whiskys Premium",
+    "Cervezas Artesanales",
+    "Licores y Coctelería",
+    "Perfumes Importados",
+    "Tabacos y Accesorios",
+    "Snacks Premium",
+    "Cafés Especiales",
+    "Agua Mineral y Jugos"
+  ];
+
+  const handleProductToggle = (product) => {
+    setSelectedProducts(prev => 
+      prev.includes(product) 
+        ? prev.filter(item => item !== product) 
+        : [...prev, product]
+    );
   };
 
   return (
@@ -49,6 +72,30 @@ const User = () => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Nueva sección de preferencias */}
+        <div className="preferences-container">
+          <h2 className="profile-section-title">Cuéntanos de ti ¿Qué quieres vender?</h2>
+          <div className="preferences-list">
+            {productCategories.map((product, index) => (
+              <div key={index} className="preference-item">
+                <input
+                  type="checkbox"
+                  id={`product-${index}`}
+                  checked={selectedProducts.includes(product)}
+                  onChange={() => handleProductToggle(product)}
+                  className="custom-checkbox"
+                />
+                <label htmlFor={`product-${index}`}>{product}</label>
+              </div>
+            ))}
+          </div>
+          {selectedProducts.length > 0 && (
+            <div className="selected-summary">
+              <p>Tus selecciones: {selectedProducts.join(", ")}</p>
+            </div>
+          )}
         </div>
       </div>
 

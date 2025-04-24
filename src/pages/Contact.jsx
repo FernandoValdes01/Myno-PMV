@@ -1,6 +1,13 @@
+import { Link } from "react-router-dom";
+
 const Contact = () => {
     return (
       <div className="page-container">
+        <div className="back-button-container">
+          <Link to="/" className="back-button">
+            ← Volver al Inicio
+          </Link>
+        </div>
         <h1 className="page-title">CONTACTO</h1>
         <div className="content">
           <p>Email: contacto@myno.com</p>
@@ -23,9 +30,10 @@ const Contact = () => {
     width: '100%',
     padding: '0.5rem',
     margin: '0.5rem 0',
-    background: '#262626',
-    border: '1px solid #404040',
-    color: '#e6e6e6'
+    background: '#1e1e1e',
+    border: '1px solid #333',
+    color: '#ffffff',
+    borderRadius: '4px'
   };
   
   export default Contact;
