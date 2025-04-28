@@ -12,8 +12,7 @@
 ## 🚀 Tecnologías Utilizadas
 
 - **Frontend**: [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)
-- **Despliegue**: [Vercel](https://vercel.com/)
-- **Linter**: ESLint con configuración personalizada
+- **Despliegue**: [Vercel](https://myno-pmn.vercel.app/)
 
 ---
 
@@ -67,7 +66,7 @@ Myno-PMN-/
 
 ## 🌐 Despliegue
 
-La aplicación está desplegada en [Vercel](https://vercel.com/), lo que permite una integración continua y despliegue automático con cada cambio en el repositorio.
+La aplicación está desplegada en [Vercel](https://myno-pmn.vercel.app/), lo que permite una integración continua y despliegue automático con cada cambio en el repositorio.
 
 ---
 
