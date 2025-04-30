@@ -1,20 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import { useState } from "react";
+import { useCart } from './CartContext';
 
 const User = () => {
   const navigate = useNavigate();
   const [selectedProducts, setSelectedProducts] = useState([]);
-  
-  const userData = {
-    name: "Juan Pérez",
-    email: "juan.perez@example.com",
-    phone: "+56 9 1234 5678",
-    purchases: [
-      { id: 1, product: "Caja de Monsters", date: "15/05/2024", price: "$12.990" },
-      { id: 2, product: "Pack de Vino Tinto", date: "02/04/2024", price: "$24.990" },
-      { id: 3, product: "Redbull Individual", date: "20/03/2024", price: "$2.490" }
-    ]
+  const { user } = useCart();
+  const userData = user || {
+    name: "Invitado",
+    email: "",
+    purchases: []
   };
 
   const productCategories = [

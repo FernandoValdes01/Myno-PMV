@@ -1,0 +1,151 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "username": "user1",
+        "password": "pass1",
+        "name": "Juan Pérez",
+        "email": "juan.perez@example.com",
+        "phone": "+56 9 1234 5678",
+        "purchases": [
+          {"containerId": 2, "date": "2024-05-15"},
+          {"containerId": 3, "date": "2024-04-02"},
+          {"containerId": 15, "date": "2024-03-20"}
+        ]
+      },
+      {
+        "id": 2,
+        "username": "user2",
+        "password": "pass2",
+        "name": "María González",
+        "email": "maria.gonzalez@example.com",
+        "phone": "+56 9 8765 4321",
+        "purchases": [
+          {"containerId": 5, "date": "2024-05-10"},
+          {"containerId": 8, "date": "2024-04-18"}
+        ]
+      }
+    ],
+    "containers": [
+      {
+        "id": 1,
+        "name": "Caja de Redbulls",
+        "price": 15000,
+        "category": "Energizantes (Redbull, Monster)",
+        "tags": ["bebida", "energizante"],
+        "image": "/src/assets/images/products/caja-redbulls.jpeg"
+      },
+      {
+        "id": 2,
+        "name": "Caja de Monsters",
+        "price": 18000,
+        "category": "Energizantes (Redbull, Monster)",
+        "tags": ["bebida", "energizante"],
+        "image": "/src/assets/images/products/caja-monsters.jpg"
+      },
+      {
+        "id": 3,
+        "name": "Caja de Vino Tinto Reserva",
+        "price": 25000,
+        "category": "Vinos y Espumantes",
+        "tags": ["alcohol", "premium"],
+        "image": "/src/assets/images/products/caja-vino-tinto-reserva.jpeg"
+      },
+      {
+        "id": 4,
+        "name": "Espumante Brut Premium",
+        "price": 22000,
+        "category": "Vinos y Espumantes",
+        "tags": ["alcohol", "celebración"],
+        "image": "/src/assets/images/products/espumante-brut-premium.jpg"
+      },
+      {
+        "id": 5,
+        "name": "Whisky Glenfiddich 12 años",
+        "price": 45000,
+        "category": "Whiskys Premium",
+        "tags": ["whisky", "premium"],
+        "image": "/src/assets/images/products/whisky-glenfiddich-12.jpg"
+      },
+      {
+        "id": 6,
+        "name": "Whisky Macallan Double Cask",
+        "price": 69000,
+        "category": "Whiskys Premium",
+        "tags": ["whisky", "lujo"],
+        "image": "/src/assets/images/products/whisky-macallan-double.jpg"
+      },
+      {
+        "id": 7,
+        "name": "Pack de Cervezas IPA Artesanales",
+        "price": 18000,
+        "category": "Cervezas Artesanales",
+        "tags": ["cerveza", "artesanal"],
+        "image": "/src/assets/images/products/pack-cervezas-ipa.jpg"
+      },
+      {
+        "id": 8,
+        "name": "Pack de Cervezas Stout",
+        "price": 17000,
+        "category": "Cervezas Artesanales",
+        "tags": ["cerveza", "negra"],
+        "image": "/src/assets/images/products/pack-cervezas-stout.jpg"
+      },
+      {
+        "id": 9,
+        "name": "Set de Coctelería + Licor de Maracuyá",
+        "price": 30000,
+        "category": "Licores y Coctelería",
+        "tags": ["coctel", "regalo"],
+        "image": "/src/assets/images/products/set-cocteleria-maracuya.jpg"
+      },
+      {
+        "id": 10,
+        "name": "Perfume Dior Sauvage 100ml",
+        "price": 85000,
+        "category": "Perfumes Importados",
+        "tags": ["perfume", "lujo"],
+        "image": "/src/assets/images/products/perfume-dior-sauvage.jpg"
+      },
+      {
+        "id": 11,
+        "name": "Perfume Carolina Herrera 212 Men",
+        "price": 78000,
+        "category": "Perfumes Importados",
+        "tags": ["perfume", "clásico"],
+        "image": "/src/assets/images/products/perfume-carolina-herrera.jpg"
+      },
+      {
+        "id": 12,
+        "name": "Pipa de Tabaco + Tabaco Premium",
+        "price": 35000,
+        "category": "Tabacos y Accesorios",
+        "tags": ["tabaco", "accesorio"],
+        "image": "/src/assets/images/products/pipa-tabaco-premium.jpg"
+      },
+      {
+        "id": 13,
+        "name": "Pack de Snacks Gourmet (nueces, chips veggie)",
+        "price": 12000,
+        "category": "Snacks Premium",
+        "tags": ["snack", "vegetariano"],
+        "image": "/src/assets/images/products/pack-snacks-gourmet.jpg"
+      },
+      {
+        "id": 14,
+        "name": "Caja de Café Premium Molido",
+        "price": 20000,
+        "category": "Cafés Especiales",
+        "tags": ["café", "premium"],
+        "image": "/src/assets/images/products/caja-cafe-premium.jpg"
+      },
+      {
+        "id": 15,
+        "name": "Pack de Aguas Minerales Perrier",
+        "price": 9000,
+        "category": "Agua Mineral y Jugos",
+        "tags": ["agua", "mineral"],
+        "image": "/src/assets/images/products/pack-aguas-perrier.jpg"
+      }
+    ]
+  }

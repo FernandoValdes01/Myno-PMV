@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { FiUser, FiShoppingCart, FiGrid, FiList } from "react-icons/fi";
 import { useCart } from "./CartContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getContainers } from "../utils/backend";
 import { 
   RedbullImage,
   MonsterImage,
@@ -22,26 +23,26 @@ import {
 
 const Home = () => {
   const { addToCart } = useCart();
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' o 'list'
-  
-  
-const items = [
-  { id: 1, name: "Caja de Redbulls", price: 15000, category: "Energizantes (Redbull, Monster)",image:RedbullImage},
-  { id: 2, name: "Caja de Monsters", price: 18000, category: "Energizantes (Redbull, Monster)",image:MonsterImage},
-  { id: 3, name: "Caja de Vino Tinto Reserva", price: 25000, category: "Vinos y Espumantes",image:VinoTintoImage},
-  { id: 4, name: "Espumante Brut Premium", price: 22000, category: "Vinos y Espumantes" ,image:EspumanteImage},
-  { id: 5, name: "Whisky Glenfiddich 12 años", price: 45000, category: "Whiskys Premium",image:WhiskyGlenfiddichImage},
-  { id: 6, name: "Whisky Macallan Double Cask", price: 69000, category: "Whiskys Premium" ,image:WhiskyMacallanImage},
-  { id: 7, name: "Pack de Cervezas IPA Artesanales", price: 18000, category: "Cervezas Artesanales",image:CervezasIPAImage},
-  { id: 8, name: "Pack de Cervezas Stout", price: 17000, category: "Cervezas Artesanales",image:CervezasStoutImage},
-  { id: 9, name: "Set de Coctelería + Licor de Maracuyá", price: 30000, category: "Licores y Coctelería" ,image:CocteleriaImage},
-  { id: 10, name: "Perfume Dior Sauvage 100ml", price: 85000, category: "Perfumes Importados" ,image:PerfumeDiorImage},
-  { id: 11, name: "Perfume Carolina Herrera 212 Men", price: 78000, category: "Perfumes Importados",image:PerfumeCarolinaImage},
-  { id: 12, name: "Pipa de Tabaco + Tabaco Premium", price: 35000, category: "Tabacos y Accesorios" ,image:TabacoImage},
-  { id: 13, name: "Pack de Snacks Gourmet (nueces, chips veggie)", price: 12000, category: "Snacks Premium",image:SnacksImage},
-  { id: 14, name: "Caja de Café Premium Molido", price: 20000, category: "Cafés Especiales",image:CafeImage},
-  { id: 15, name: "Pack de Aguas Minerales Perrier", price: 9000, category: "Agua Mineral y Jugos",image:AguaMineralImage}
-];
+  const [viewMode, setViewMode] = useState('grid');
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Cargar productos desde data.json
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const containers = await getContainers();
+        setProducts(containers);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    loadProducts();
+  }, []);
+
 
 const handleAddToCart = (item) => {
   addToCart(item);

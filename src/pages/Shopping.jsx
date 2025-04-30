@@ -27,7 +27,10 @@ const Shopping = () => {
           ))}
           <div className="cart-summary">
             <p>Total: ${cart.reduce((sum, item) => sum + item.price, 0).toLocaleString('es-CL')}</p>
-            <button className="buy-button" onClick={clearCart}>
+            <button
+             className="buy-button" 
+             onClick={clearCart}
+             disabled={cart.length === 0}>
               VACIAR CARRITO
             </button>
           </div>

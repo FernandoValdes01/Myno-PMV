@@ -1,5 +1,5 @@
 
-# 🛍️ Myno PMN
+# 🛍️ Myno PMV
 
 **Myno** es un proyecto que busca implementar tecnologías de recomendación de productos inspiradas en los algoritmos de grandes empresas como Facebook y Alibaba. Su objetivo es ofrecer a los usuarios sugerencias personalizadas basadas en su historial de compras en la tienda.
 
