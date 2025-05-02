@@ -9,16 +9,26 @@ const Recommendations = () => {
   useEffect(() => {
     const loadRecommendations = async () => {
       if (user) {
-        const recommended = recommendContainer();
-        const allContainers = await getContainers();
-        
-        // Mezclar recomendaciones con productos aleatorios
-        const otherProducts = allContainers
-          .filter(p => p.id !== recommended?.id)
-          .sort(() => 0.5 - Math.random())
-          .slice(0, 3);
-        
-        setRecommendations([recommended, ...otherProducts].filter(Boolean));
+        try {
+          const recommended = await recommendContainer(); // Añadir await aquí
+          const allContainers = await getContainers();
+          
+          // Validar que el producto recomendado tenga la estructura correcta
+          const validRecommended = recommended && recommended.id 
+            ? recommended 
+            : allContainers[Math.floor(Math.random() * allContainers.length)];
+          
+          // Mezclar con productos aleatorios (asegurando estructura)
+          const otherProducts = allContainers
+            .filter(p => p.id !== validRecommended?.id)
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 3)
+            .filter(p => p.price); // Solo productos con precio definido
+
+          setRecommendations([validRecommended, ...otherProducts].filter(Boolean));
+        } catch (error) {
+          console.error("Error loading recommendations:", error);
+        }
       }
     };
     
@@ -31,9 +41,11 @@ const Recommendations = () => {
       <div className="recommendations-grid">
         {recommendations.map(item => (
           <div key={item.id} className="recommendation-card">
-            <img src={item.image} alt={item.name} />
-            <h3>{item.name}</h3>
-            <p>${item.price.toLocaleString('es-CL')}</p>
+            <img src={item.image} alt={item.name} className="recommendation-image" />
+            <div className="recommendation-details">
+              <h3>{item.name}</h3>
+              <p>${item.price?.toLocaleString('es-CL') || 'Precio no disponible'}</p>
+            </div>
           </div>
         ))}
       </div>

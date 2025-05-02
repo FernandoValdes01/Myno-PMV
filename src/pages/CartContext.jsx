@@ -5,18 +5,31 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // Cargar datos del usuario al iniciar
   useEffect(() => {
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+      setIsAuthenticated(true);
     }
   }, []);
 
   const login = (userData) => {
     setUser(userData);
+    setIsAuthenticated(true);
     localStorage.setItem('currentUser', JSON.stringify(userData));
+  };
+
+  const logout = () => {
+    setUser(null);
+    setIsAuthenticated(false);
+    localStorage.removeItem('currentUser');
+  };
+
+  const clearCart = () => {
+    setCart([]);
   };
 
   const addToCart = (item) => {
@@ -42,7 +55,16 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, user, addToCart, login, savePurchase }}>
+    <CartContext.Provider value={{ 
+      cart, 
+      user, 
+      isAuthenticated,
+      login, 
+      logout,
+      addToCart, 
+      savePurchase, 
+      clearCart 
+    }}>
       {children}
     </CartContext.Provider>
   );
