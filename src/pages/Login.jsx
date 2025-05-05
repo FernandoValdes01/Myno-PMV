@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from "./CartContext";
 import { login } from '../utils/backend';
@@ -9,6 +9,12 @@ const Login = () => {
   const [error, setError] = useState('');
   const { login: contextLogin } = useCart();
   const navigate = useNavigate();
+
+  // Establecer valores predeterminados al cargar el componente
+  useEffect(() => {
+    setUsername('user1');
+    setPassword('pass1');
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,6 +55,16 @@ const Login = () => {
       >
         REGISTRARSE
       </button>
+      {/* Mensaje para el profesor */}
+      <p style={{ 
+        marginTop: '2rem',
+        fontSize: '0.9rem',
+        color: '#666',
+        fontStyle: 'italic',
+        textAlign: 'center'
+      }}>
+        Credenciales de prueba: user1 / pass1
+      </p>
     </div>
   );
 };
