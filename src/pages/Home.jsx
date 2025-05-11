@@ -4,10 +4,9 @@ import { useCart } from "./CartContext";
 import { useState, useEffect } from "react";
 import { getContainers } from "../utils/backend";
 import data from "../../public/data.json";
-import { getRecommendations } from "../utils/recommendationEngine";
 
 const Home = () => {
-  const { addToCart, isAuthenticated, currentUser, purchaseUpdate } = useCart();
+  const { addToCart, isAuthenticated, user, purchaseUpdate } = useCart();
   const [viewMode, setViewMode] = useState('grid');
   const [products, setProducts] = useState([]);
   const [recommendedProducts, setRecommendedProducts] = useState([]);
@@ -24,58 +23,55 @@ const Home = () => {
     const loadProducts = async () => {
       try {
         let containers = await getContainers();
-        
+
         if (!containers || containers.length === 0) {
           containers = data.containers;
           setRecommendationReason("Usando datos locales");
         }
 
-        // Extraer categorías únicas
-        const categories = [...new Set(containers.map(item => item.category))];
-        setAvailableCategories(categories);
-
-        // Guardar todos los productos
         setProducts(containers);
+        setFilteredProducts(containers);
 
-        // Obtener productos recomendados
-        const recommended = getRecommendations(
-          data.users || [], 
-          containers, 
-          isAuthenticated ? currentUser?.id : null
-        );
+        const user1 = data.users.find(u => u.username === "user1");
+        const user2 = data.users.find(u => u.username === "user2");
+
+        let recommended = [];
+
+        if (isAuthenticated && user?.username === "user1") {
+          const ids = new Set(user1?.purchases.flatMap(p => p.items?.map(i => i.id)) || []);
+          recommended = containers.filter(c => ids.has(c.id));
+          setRecommendationReason("Basado en tus compras anteriores (user1)");
+        } else if (isAuthenticated && user?.username === "user2") {
+          const ids = new Set(user2?.purchases.flatMap(p => p.items?.map(i => i.id)) || []);
+          recommended = containers.filter(c => ids.has(c.id));
+          setRecommendationReason("Basado en tus compras anteriores (user2)");
+        } else {
+          const ids1 = user1?.purchases.flatMap(p => p.items?.map(i => i.id)) || [];
+          const ids2 = user2?.purchases.flatMap(p => p.items?.map(i => i.id)) || [];
+          const mixIds = [...new Set([...ids1.slice(0, 2), ...ids2.slice(0, 2)])];
+          recommended = containers.filter(c => mixIds.includes(c.id));
+          setRecommendationReason("Productos populares entre nuestros usuarios");
+        }
 
         setRecommendedProducts(recommended);
-        setFilteredProducts(containers); // Mostrar todos los productos inicialmente
-        
-        // Establecer el motivo de recomendación
-        if (isAuthenticated && currentUser) {
-          if (currentUser.purchases?.length > 0) {
-            const lastPurchase = currentUser.purchases[currentUser.purchases.length - 1];
-            const lastProduct = containers.find(c => c.id === lastPurchase.containerId)?.name || '';
-            setRecommendationReason(`Basado en tus compras recientes${lastProduct ? ` (${lastProduct})` : ''}`);
-          } else {
-            setRecommendationReason("Productos populares para nuevos usuarios");
-          }
-        } else {
-          setRecommendationReason("Productos más populares");
-        }
+        const categories = [...new Set(containers.map(item => item.category))];
+        setAvailableCategories(categories);
       } catch (error) {
         console.error("Error loading products:", error);
         const containers = data.containers || [];
         setProducts(containers);
-        setRecommendedProducts(containers.slice(0, 4));
         setFilteredProducts(containers);
+        setRecommendedProducts(containers.slice(0, 4));
         setRecommendationReason("Usando datos de respaldo");
       } finally {
         setIsLoading(false);
       }
     };
-    
+
     loadProducts();
-  }, [isAuthenticated, currentUser, purchaseUpdate]);
+  }, [isAuthenticated, user, purchaseUpdate]);
 
   useEffect(() => {
-    // Aplicar filtros cuando cambian los parámetros
     let filtered = products;
 
     if (searchTerm) {
@@ -103,10 +99,7 @@ const Home = () => {
     alert(`${item.name} agregado al carrito!`);
   };
 
-  const toggleViewMode = (mode) => {
-    setViewMode(mode);
-  };
-
+  const toggleViewMode = (mode) => setViewMode(mode);
   const toggleCategory = (category) => {
     setSelectedCategories(prev =>
       prev.includes(category)
@@ -114,7 +107,6 @@ const Home = () => {
         : [...prev, category]
     );
   };
-
   const resetFilters = () => {
     setSearchTerm('');
     setPriceRange([0, 100000]);
@@ -129,8 +121,8 @@ const Home = () => {
         </span>
       )}
       <div className="product-image-container">
-        <img 
-          src={item.image || '/images/products/placeholder.jpg'} 
+        <img
+          src={item.image || '/images/products/placeholder.jpg'}
           alt={item.name}
           className="product-image"
           onError={(e) => {
@@ -150,10 +142,7 @@ const Home = () => {
         )}
         <p className="product-price">${item.price.toLocaleString('es-CL')}</p>
       </div>
-      <button 
-        className="buy-button"
-        onClick={() => handleAddToCart(item)}
-      >
+      <button className="buy-button" onClick={() => handleAddToCart(item)}>
         COMPRAR
       </button>
     </div>
@@ -192,15 +181,12 @@ const Home = () => {
                 className="search-input"
               />
               {searchTerm && (
-                <button 
-                  onClick={() => setSearchTerm('')}
-                  className="clear-search"
-                >
+                <button onClick={() => setSearchTerm('')} className="clear-search">
                   <FiX />
                 </button>
               )}
             </div>
-            <button 
+            <button
               className={`filter-toggle ${showFilters ? 'active' : ''}`}
               onClick={() => setShowFilters(!showFilters)}
             >
@@ -209,13 +195,13 @@ const Home = () => {
           </div>
 
           <div className="view-mode-buttons">
-            <button 
+            <button
               className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
               onClick={() => toggleViewMode('grid')}
             >
               <FiGrid /> Grid
             </button>
-            <button 
+            <button
               className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
               onClick={() => toggleViewMode('list')}
             >
@@ -265,10 +251,7 @@ const Home = () => {
               </div>
             </div>
 
-            <button 
-              className="secondary-button reset-filters"
-              onClick={resetFilters}
-            >
+            <button className="secondary-button reset-filters" onClick={resetFilters}>
               <FiX /> Limpiar filtros
             </button>
           </div>
@@ -281,7 +264,6 @@ const Home = () => {
           </div>
         ) : (
           <div className={`items-container ${viewMode}-view`}>
-            {/* Sección de productos recomendados */}
             {recommendedProducts.length > 0 && (
               <>
                 <h2 className="section-title">Recomendados para ti</h2>
@@ -291,14 +273,9 @@ const Home = () => {
               </>
             )}
 
-            {/* Sección de todos los productos */}
             {filteredProducts.length > 0 ? (
               <>
-                <h2 className="section-title">
-                  {searchTerm || selectedCategories.length > 0 || priceRange[1] < 100000
-                    ? `Productos encontrados (${filteredProducts.length})`
-                    : 'Todos nuestros productos'}
-                </h2>
+                <h2 className="section-title">Todos nuestros productos</h2>
                 <div className="all-products">
                   {filteredProducts.map(item => renderProductCard(item))}
                 </div>
@@ -307,10 +284,7 @@ const Home = () => {
               <div className="empty-results">
                 <h3>No se encontraron productos</h3>
                 <p>Intenta ajustar tus filtros de búsqueda</p>
-                <button 
-                  className="secondary-button"
-                  onClick={resetFilters}
-                >
+                <button className="secondary-button" onClick={resetFilters}>
                   Limpiar filtros
                 </button>
               </div>
