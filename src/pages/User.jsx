@@ -22,17 +22,11 @@ const User = () => {
   ];
 
   const handleProductToggle = (product) => {
-    setSelectedProducts(prev => 
-      prev.includes(product) 
-        ? prev.filter(item => item !== product) 
+    setSelectedProducts(prev =>
+      prev.includes(product)
+        ? prev.filter(item => item !== product)
         : [...prev, product]
     );
-  };
-
-  // Función para encontrar los detalles de los productos comprados
-  const getPurchaseDetails = (containerId) => {
-    const container = data.containers.find(item => item.id === containerId);
-    return container || null;
   };
 
   if (!user) return null;
@@ -48,7 +42,7 @@ const User = () => {
           Cerrar Sesión
         </button>
       </div>
-      
+
       <div className="user-profile-grid">
         <div className="profile-container">
           <h2 className="profile-section-title">Información Personal</h2>
@@ -61,34 +55,39 @@ const User = () => {
 
         <div className="purchases-container">
           <h2 className="profile-section-title">Historial de Compras</h2>
-          <div className="purchases-list">
-            {user.purchases.map((purchase, index) => {
-              const product = getPurchaseDetails(purchase.containerId);
-              return (
-                <div key={index} className="purchase-item">
-                  {product ? (
-                    <>
-                      <div className="purchase-product">
-                        <img 
-                          src={product.image} 
-                          alt={product.name} 
-                          className="purchase-image"
-                        />
-                        <div className="purchase-details">
-                          <p><strong>{product.name}</strong></p>
-                          <p><strong>Categoría:</strong> {product.category}</p>
-                          <p><strong>Precio:</strong> ${product.price.toLocaleString()}</p>
+          {Array.isArray(user.purchases) && user.purchases.length > 0 ? (
+            user.purchases.map((purchase, index) => (
+              <div key={index} className="purchase-entry">
+                <p className="text-muted"><strong>Fecha:</strong> {new Date(purchase.date).toLocaleString()}</p>
+                {Array.isArray(purchase.items) ? (
+                  <div className="purchases-list">
+                    {purchase.items.map((item, idx) => (
+                      <div key={idx} className="item-card">
+                        <div className="product-image-container">
+                          <img
+                            src={item.image || "/images/products/placeholder.jpg"}
+                            alt={item.name}
+                            className="product-image"
+                          />
+                        </div>
+                        <div className="product-details">
+                          <h3>{item.name}</h3>
+                          <p className="product-category">{item.category}</p>
+                          <p className="product-price">
+                            ${item.price.toLocaleString()} x{item.quantity}
+                          </p>
                         </div>
                       </div>
-                      <p className="purchase-date"><strong>Fecha:</strong> {purchase.date}</p>
-                    </>
-                  ) : (
-                    <p>Producto no encontrado (ID: {purchase.containerId})</p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-muted">Formato de compra no válido.</p>
+                )}
+              </div>
+            ))
+          ) : (
+            <p className="text-muted">No hay compras registradas aún.</p>
+          )}
         </div>
 
         <div className="preferences-container">

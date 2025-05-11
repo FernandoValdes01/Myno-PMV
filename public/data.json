@@ -1,31 +1,91 @@
 {
-    "users": [
-      {
-        "id": 1,
-        "username": "user1",
-        "password": "pass1",
-        "name": "Juan Pérez",
-        "email": "juan.perez@example.com",
-        "phone": "+56 9 1234 5678",
-        "purchases": [
-          {"containerId": 2, "date": "2024-05-15"},
-          {"containerId": 3, "date": "2024-04-02"},
-          {"containerId": 15, "date": "2024-03-20"}
-        ]
-      },
-      {
-        "id": 2,
-        "username": "user2",
-        "password": "pass2",
-        "name": "María González",
-        "email": "maria.gonzalez@example.com",
-        "phone": "+56 9 8765 4321",
-        "purchases": [
-          {"containerId": 5, "date": "2024-05-10"},
-          {"containerId": 8, "date": "2024-04-18"}
-        ]
-      }
-    ],
+  "users": [
+    {
+      "id": 1,
+      "username": "user1",
+      "password": "pass1",
+      "name": "Juan Pérez",
+      "email": "juan.perez@example.com",
+      "phone": "+56 9 1234 5678",
+      "purchases": [
+        {
+          "date": "2024-05-15",
+          "items": [
+            {
+              "id": 2,
+              "name": "Caja de Monsters",
+              "price": 18000,
+              "category": "Energizantes (Redbull, Monster)",
+              "image": "/images/products/caja-monsters.jpg",
+              "quantity": 1
+            }
+          ]
+        },
+        {
+          "date": "2024-04-02",
+          "items": [
+            {
+              "id": 3,
+              "name": "Caja de Vino Tinto Reserva",
+              "price": 25000,
+              "category": "Vinos y Espumantes",
+              "image": "/images/products/caja-vino-tinto-reserva.jpeg",
+              "quantity": 1
+            }
+          ]
+        },
+        {
+          "date": "2024-03-20",
+          "items": [
+            {
+              "id": 15,
+              "name": "Pack de Aguas Minerales Perrier",
+              "price": 9000,
+              "category": "Agua Mineral y Jugos",
+              "image": "/images/products/pack-aguas-perrier.jpg",
+              "quantity": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "username": "user2",
+      "password": "pass2",
+      "name": "María González",
+      "email": "maria.gonzalez@example.com",
+      "phone": "+56 9 8765 4321",
+      "purchases": [
+        {
+          "date": "2024-05-10",
+          "items": [
+            {
+              "id": 5,
+              "name": "Whisky Glenfiddich 12 años",
+              "price": 45000,
+              "category": "Whiskys Premium",
+              "image": "/images/products/whisky-glenfiddich-12.jpg",
+              "quantity": 1
+            }
+          ]
+        },
+        {
+          "date": "2024-04-18",
+          "items": [
+            {
+              "id": 8,
+              "name": "Pack de Cervezas Stout",
+              "price": 17000,
+              "category": "Cervezas Artesanales",
+              "image": "/images/products/pack-cervezas-stout.jpg",
+              "quantity": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
     "containers": [
       {
         "id": 1,
