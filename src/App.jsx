@@ -1,5 +1,5 @@
 import { Routes, Route, Link, Navigate } from "react-router-dom";
-import { useCart } from "./pages/CartContext";
+import { useCart } from "./pages/CartContext"; // Importación corregida
 import Home from "./pages/Home";
 import User from "./pages/User";
 import Shopping from "./pages/Shopping";
@@ -23,7 +23,7 @@ function App() {
             <User />
           </PrivateRoute>
         } />
-        <Route path="/shopping" element={<Shopping />} />
+        <Route path="/shopping" element={<Shopping />} /> {/* Esta es tu ruta del carrito */}
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
       </Routes>
