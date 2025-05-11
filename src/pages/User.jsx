@@ -29,6 +29,12 @@ const User = () => {
     );
   };
 
+  // Función para encontrar los detalles de los productos comprados
+  const getPurchaseDetails = (containerId) => {
+    const container = data.containers.find(item => item.id === containerId);
+    return container || null;
+  };
+
   if (!user) return null;
 
   return (
@@ -56,16 +62,35 @@ const User = () => {
         <div className="purchases-container">
           <h2 className="profile-section-title">Historial de Compras</h2>
           <div className="purchases-list">
-            {user.purchases.map((item, index) => (
-              <div key={index} className="purchase-item">
-                <p><strong>ID Producto:</strong> {item.containerId}</p>
-                <p><strong>Fecha:</strong> {item.date}</p>
-              </div>
-            ))}
+            {user.purchases.map((purchase, index) => {
+              const product = getPurchaseDetails(purchase.containerId);
+              return (
+                <div key={index} className="purchase-item">
+                  {product ? (
+                    <>
+                      <div className="purchase-product">
+                        <img 
+                          src={product.image} 
+                          alt={product.name} 
+                          className="purchase-image"
+                        />
+                        <div className="purchase-details">
+                          <p><strong>{product.name}</strong></p>
+                          <p><strong>Categoría:</strong> {product.category}</p>
+                          <p><strong>Precio:</strong> ${product.price.toLocaleString()}</p>
+                        </div>
+                      </div>
+                      <p className="purchase-date"><strong>Fecha:</strong> {purchase.date}</p>
+                    </>
+                  ) : (
+                    <p>Producto no encontrado (ID: {purchase.containerId})</p>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Sección de preferencias (corregida) */}
         <div className="preferences-container">
           <h2 className="profile-section-title">Cuéntanos de ti ¿Qué quieres vender?</h2>
           <div className="preferences-list">
@@ -91,6 +116,132 @@ const User = () => {
       </div>
     </div>
   );
+};
+
+// Datos simulados (en un proyecto real estos vendrían de una API o contexto)
+const data = {
+  containers: [
+    {
+      "id": 1,
+      "name": "Caja de Redbulls",
+      "price": 15000,
+      "category": "Energizantes (Redbull, Monster)",
+      "tags": ["bebida", "energizante"],
+      "image": "/images/products/caja-redbulls.jpeg"
+    },
+    {
+      "id": 2,
+      "name": "Caja de Monsters",
+      "price": 18000,
+      "category": "Energizantes (Redbull, Monster)",
+      "tags": ["bebida", "energizante"],
+      "image": "/images/products/caja-monsters.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Caja de Vino Tinto Reserva",
+      "price": 25000,
+      "category": "Vinos y Espumantes",
+      "tags": ["alcohol", "premium"],
+      "image": "/images/products/caja-vino-tinto-reserva.jpeg"
+    },
+    {
+      "id": 4,
+      "name": "Espumante Brut Premium",
+      "price": 22000,
+      "category": "Vinos y Espumantes",
+      "tags": ["alcohol", "celebración"],
+      "image": "/images/products/espumante-brut-premium.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Whisky Glenfiddich 12 años",
+      "price": 45000,
+      "category": "Whiskys Premium",
+      "tags": ["whisky", "premium"],
+      "image": "/images/products/whisky-glenfiddich-12.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Whisky Macallan Double Cask",
+      "price": 69000,
+      "category": "Whiskys Premium",
+      "tags": ["whisky", "lujo"],
+      "image": "/images/products/whisky-macallan-double.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Pack de Cervezas IPA Artesanales",
+      "price": 18000,
+      "category": "Cervezas Artesanales",
+      "tags": ["cerveza", "artesanal"],
+      "image": "/images/products/pack-cervezas-ipa.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Pack de Cervezas Stout",
+      "price": 17000,
+      "category": "Cervezas Artesanales",
+      "tags": ["cerveza", "negra"],
+      "image": "/images/products/pack-cervezas-stout.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Set de Coctelería + Licor de Maracuyá",
+      "price": 30000,
+      "category": "Licores y Coctelería",
+      "tags": ["coctel", "regalo"],
+      "image": "/images/products/set-cocteleria-maracuya.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Perfume Dior Sauvage 100ml",
+      "price": 85000,
+      "category": "Perfumes Importados",
+      "tags": ["perfume", "lujo"],
+      "image": "/images/products/perfume-dior-sauvage.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Perfume Carolina Herrera 212 Men",
+      "price": 78000,
+      "category": "Perfumes Importados",
+      "tags": ["perfume", "clásico"],
+      "image": "/images/products/perfume-carolina-herrera.jpg"
+    },
+    {
+      "id": 12,
+      "name": "Pipa de Tabaco + Tabaco Premium",
+      "price": 35000,
+      "category": "Tabacos y Accesorios",
+      "tags": ["tabaco", "accesorio"],
+      "image": "/images/products/pipa-tabaco-premium.jpg"
+    },
+    {
+      "id": 13,
+      "name": "Pack de Snacks Gourmet (nueces, chips veggie)",
+      "price": 12000,
+      "category": "Snacks Premium",
+      "tags": ["snack", "vegetariano"],
+      "image": "/images/products/pack-snacks-gourmet.jpg"
+    },
+    {
+      "id": 14,
+      "name": "Caja de Café Premium Molido",
+      "price": 20000,
+      "category": "Cafés Especiales",
+      "tags": ["café", "premium"],
+      "image": "/images/products/caja-cafe-premium.jpg"
+    },
+    {
+      "id": 15,
+      "name": "Pack de Aguas Minerales Perrier",
+      "price": 9000,
+      "category": "Agua Mineral y Jugos",
+      "tags": ["agua", "mineral"],
+      "image": "/images/products/pack-aguas-perrier.jpg"
+    }
+  ]
 };
 
 export default User;
